@@ -22,7 +22,7 @@ public class PdfMergeServiceImpl implements PdfMergeService {
 
             excelService.convertExcelToPdf();
 
-            File dir = new File("C:/MySpace/Data");
+            File dir = new File("C:/MySpace/Dataset/Data");
             File[] pdfs = dir.listFiles();
 
             List<String> firstPage = new ArrayList<>();
@@ -37,11 +37,11 @@ public class PdfMergeServiceImpl implements PdfMergeService {
             });
 
             firstPage.stream().forEach(page -> {
-                File upper = new File("C:/MySpace/Data/" + page);
+                File upper = new File("C:/MySpace/Dataset/Data/" + page);
                 File lower = findFile(upper.getName().substring(0, upper.getName().length() - 4), remainingPages);
 
                 PDFMergerUtility obj = new PDFMergerUtility();
-                obj.setDestinationFileName("C:/MySpace/Output/" + lower.getName());
+                obj.setDestinationFileName("C:/MySpace/Dataset/Output/" + lower.getName());
 
                 try {
                     obj.addSource(upper);
@@ -58,7 +58,7 @@ public class PdfMergeServiceImpl implements PdfMergeService {
         AtomicReference<File> file = new AtomicReference<>();
         remainingPages.stream().forEach(page -> {
             if (page.substring(0, page.length() - 4).contains(upper)) {
-                file.set(new File("C:/MySpace/Data/" + page));
+                file.set(new File("C:/MySpace/Dataset/Data/" + page));
             }
         });
         return file.get();

@@ -11,7 +11,7 @@ public class ExcelServiceImpl implements ExcelService {
     public void convertExcelToPdf() {
         try {
             Workbook workbook = new Workbook();
-            workbook.loadFromFile("C:/MySpace/Cover/Cover.xlsx");
+            workbook.loadFromFile("C:/MySpace/Dataset/Cover/Cover.xlsx");
             int sheetCount = workbook.getWorksheets().getCount();
 
             for (int i = 1; i < sheetCount; i++) {
@@ -22,7 +22,7 @@ public class ExcelServiceImpl implements ExcelService {
                 Worksheet ws = workbook.getWorksheets().get(j);
                 IXLSRange iXLSRange = ws.get("G6");
                 String fileName = iXLSRange.getText().substring(0, iXLSRange.getText().indexOf(" "));
-                workbook.saveToFile("C:/MySpace/Data/" + fileName + ".pdf", FileFormat.PDF);
+                workbook.saveToFile("C:/MySpace/Dataset/Data/" + fileName + ".pdf", FileFormat.PDF);
 
                 if (j < workbook.getWorksheets().getCount() - 1) {
                     workbook.getWorksheets().get(j + 1).setVisibility(WorksheetVisibility.Visible);
